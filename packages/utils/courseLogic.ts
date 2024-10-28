@@ -46,9 +46,9 @@ export class CourseLogic {
     this.course = course!
     this.courseApplicants = courseApplicants!
     this.profile = profile
-    this.myApplication = this.courseApplicants.find(
-      application => application.profile?.id === this.profile?.id,
-    )
+    this.myApplication = this.profile ? this.courseApplicants.find(
+      application => application.profile?.id === this.profile!.id,
+    ) : undefined
     this.myInstallments = this.calculateInstallments()
     this.paidInstallments = this.myInstallments.filter(i => !!i.payment)
     this.allUnPaidInstallments = this.myInstallments.filter(i => !i.payment)
@@ -127,7 +127,7 @@ export class CourseLogic {
       const evalDate = addDays(
         date, // and add evaluation time
         this.course.assignmentEvaluationTime ??
-          DEFAULT_ASSIGNMENT_EVALUATION_TIME,
+        DEFAULT_ASSIGNMENT_EVALUATION_TIME,
       )
 
       return endOfDay(evalDate)
@@ -139,8 +139,8 @@ export class CourseLogic {
       date, // and add evaluation time + submission deadline
       (this.course.assignmentEvaluationTime ??
         DEFAULT_ASSIGNMENT_EVALUATION_TIME) +
-        (this.course.assignmentSubmissionDeadline ??
-          DEFAULT_ASSIGNMENT_SUBMISSION_DEADLINE),
+      (this.course.assignmentSubmissionDeadline ??
+        DEFAULT_ASSIGNMENT_SUBMISSION_DEADLINE),
     )
 
     return endOfDay(evalDate)
@@ -171,7 +171,7 @@ export class CourseLogic {
     const deadlineDate = addDays(
       applicationDate,
       this.course.assignmentSubmissionDeadline ??
-        DEFAULT_ASSIGNMENT_SUBMISSION_DEADLINE,
+      DEFAULT_ASSIGNMENT_SUBMISSION_DEADLINE,
     )
 
     return endOfDay(deadlineDate)
@@ -315,7 +315,7 @@ export class CourseLogic {
       const dueDate = addDays(
         application.createdAt,
         this.course.assignmentSubmissionDeadline ??
-          DEFAULT_ASSIGNMENT_SUBMISSION_DEADLINE,
+        DEFAULT_ASSIGNMENT_SUBMISSION_DEADLINE,
       )
       const endOfDueDate = endOfDay(dueDate)
 
@@ -330,17 +330,17 @@ export class CourseLogic {
     // Step 2 - check if applicant send files but didn't receive any approvement
     const dueEvalDate = application.lastUpdateDate
       ? addDays(
-          application.lastUpdateDate,
-          this.course.assignmentEvaluationTime ??
-            DEFAULT_ASSIGNMENT_EVALUATION_TIME,
-        )
+        application.lastUpdateDate,
+        this.course.assignmentEvaluationTime ??
+        DEFAULT_ASSIGNMENT_EVALUATION_TIME,
+      )
       : addDays(
-          application.createdAt,
-          (this.course.assignmentSubmissionDeadline ??
-            DEFAULT_ASSIGNMENT_SUBMISSION_DEADLINE) +
-            (this.course.assignmentEvaluationTime ??
-              DEFAULT_ASSIGNMENT_EVALUATION_TIME),
-        )
+        application.createdAt,
+        (this.course.assignmentSubmissionDeadline ??
+          DEFAULT_ASSIGNMENT_SUBMISSION_DEADLINE) +
+        (this.course.assignmentEvaluationTime ??
+          DEFAULT_ASSIGNMENT_EVALUATION_TIME),
+      )
 
     const endOfDueEvalDate = endOfDay(dueEvalDate)
 
