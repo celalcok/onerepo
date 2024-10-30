@@ -24,18 +24,18 @@ test('Example', { tag: ['@onboarding'] }, async () => {
 
 // 02-02. Group of Tests
 // TODO: Check how `pwdescribe` snippet works
-test.describe('opentable.com', { tag: ['@onboarding'] }, () => {
+test.describe('https://github.com', { tag: ['@onboarding'] }, () => {
   // TODO:
   // - [ ] Write `pwtest` snippet to generate a test code block
   // - [ ] Update the test title to "should display page title"
-  // - [ ] Goto the URL https://www.opentable.com
-  // - [ ] Verify the first title element (h2) has the correct text
+  // - [ ] Goto the URL https://github.com
+  // - [ ] Verify the first title element (h1) has the correct text
   //
   // TODO:
   // - [ ] Write `pwtest` snippet to generate a test code block
-  // - [ ] Update the test title to "should search for a location"
-  // - [ ] Goto the URL https://www.opentable.com
-  // - [ ] Type "Amsterdam" in the search input field (Location, Restaurant, or Cuisine)
-  // - [ ] Click the "Let's go" button or press Enter
-  // - [ ] Verify it navigates to the search results page and the title contains "Amsterdam"
+  // - [ ] Update the test title to "should jump to the pricing page"
+  // - [ ] Goto the URL https://github.com
+  // - [ ] Click the "Search or jump to…" input field
+  // - [ ] Click the "Pricing" link in the dropdown
+  // - [ ] Verify it navigates to the pricing page and the page title (on browser tab) contains 'Pricing'
 })

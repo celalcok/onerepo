@@ -35,6 +35,7 @@ test.describe('08. Contact', () => {
 
   test.fail(
     'TC-02: should send message via contact form',
+    { tag: ['@mutation', '@captcha'] },
     async ({ contactPage }) => {
       await contactPage.sendContactMessage()
       // It may not always work because of the captcha protection

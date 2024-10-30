@@ -11,14 +11,14 @@ test.describe('OB-04. Assertions', { tag: ['@onboarding'] }, () => {
   // TODO:
   // - [ ] Read the documentation on https://playwright.dev/docs/test-assertions
   //
-  // - [ ] Goto the URL https://www.opentable.com
+  // - [ ] Goto the URL https://github.com
   // Write tests for AT LEAST 10 of the assertions listed below
   // Use different values from the documentation to test the assertions
   //
   // AUTO RETRYING ASSERTIONS
   // await expect(locator).toBeAttached()	Element is attached
   test('TC-01: should be attached', async ({ page }) => {
-    const url = 'https://www.opentable.com'
+    const url = 'https://github.com'
     await page.goto(url)
 
     // Test code here
