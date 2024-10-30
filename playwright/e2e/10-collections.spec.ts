@@ -66,7 +66,7 @@ test.describe('10. Collections', () => {
     ).toBe('3')
   })
 
-  test('TC-03: should display display pictures, titles, text and author for collection booklet', async ({
+  test('TC-03: should display pictures, titles, text and author for collection booklet', async ({
     page,
     layoutPage,
   }) => {
