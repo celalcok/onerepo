@@ -17,10 +17,10 @@ export class DashboardArtsPage {
   constructor(page: Page) {
     this.page = page
 
-    this.artsMenuItem = page.getByTestId('arts')
-    this.approvedArtsLink = page.getByTestId('approved-arts')
-    this.pendingArtsLink = page.getByTestId('pending-arts')
-    this.rejectedArtsMenu = page.getByTestId('rejected-arts')
+    this.artsMenuItem = page.getByTestId('link-arts')
+    this.approvedArtsLink = page.getByTestId('link-approved-arts')
+    this.pendingArtsLink = page.getByTestId('link-pending-arts')
+    this.rejectedArtsMenu = page.getByTestId('link-rejected-arts')
 
     this.feedbackInput = page.getByTestId('input-feedback')
 
