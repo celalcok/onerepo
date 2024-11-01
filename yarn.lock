@@ -5,15 +5,15 @@ __metadata:
   version: 8
   cacheKey: 10
 
-"@ai-sdk/openai@npm:^0.0.70":
-  version: 0.0.70
-  resolution: "@ai-sdk/openai@npm:0.0.70"
+"@ai-sdk/openai@npm:^0.0.71":
+  version: 0.0.71
+  resolution: "@ai-sdk/openai@npm:0.0.71"
   dependencies:
     "@ai-sdk/provider": "npm:0.0.26"
     "@ai-sdk/provider-utils": "npm:1.0.22"
   peerDependencies:
     zod: ^3.0.0
-  checksum: 10/b7f46da9db812bf768b7446bffe9c2c9f5ea8d2ecdcf758082eb5b3557dd36b1e41a20c88e86fbccd0a2de6005f519aad1a820aa186b94c82f5d26cabc33ab42
+  checksum: 10/5f27ee53cea43e7983db7afd6a2c83bb54ae8f6c87daaa13bc37ea4ecab8b4d907d7cb8e27d1b5b894efccf08440753dfeb8fbf032de996cc02b51cbc4fc2c16
   languageName: node
   linkType: hard
 
@@ -43,13 +43,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ai-sdk/react@npm:0.0.69":
-  version: 0.0.69
-  resolution: "@ai-sdk/react@npm:0.0.69"
+"@ai-sdk/react@npm:0.0.70":
+  version: 0.0.70
+  resolution: "@ai-sdk/react@npm:0.0.70"
   dependencies:
     "@ai-sdk/provider-utils": "npm:1.0.22"
     "@ai-sdk/ui-utils": "npm:0.0.50"
     swr: "npm:^2.2.5"
+    throttleit: "npm:2.1.0"
   peerDependencies:
     react: ^18 || ^19 || ^19.0.0-rc
     zod: ^3.0.0
@@ -58,7 +59,7 @@ __metadata:
       optional: true
     zod:
       optional: true
-  checksum: 10/5a7125cdea39eeba28a6a8283d02c98bc5114b1dd7507f2c783ba790bc8027b339e6e6cb1170f498201945b605d370c51d3bb4638e9ee00b4f30621512097214
+  checksum: 10/5aaa563651321e413da85f6eb91ccbad59766b2b36280ab849811f249ed0a910a2337acd4e07f669783a8e8e765b661647bb0106fcc61fa13a25c2f02d13f4af
   languageName: node
   linkType: hard
 
@@ -10059,7 +10060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint-scope@npm:^3.7.3":
+"@types/eslint-scope@npm:^3.7.3, @types/eslint-scope@npm:^3.7.7":
   version: 3.7.7
   resolution: "@types/eslint-scope@npm:3.7.7"
   dependencies:
@@ -11798,13 +11799,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ai@npm:^3.4.30":
-  version: 3.4.30
-  resolution: "ai@npm:3.4.30"
+"ai@npm:^3.4.31":
+  version: 3.4.31
+  resolution: "ai@npm:3.4.31"
   dependencies:
     "@ai-sdk/provider": "npm:0.0.26"
     "@ai-sdk/provider-utils": "npm:1.0.22"
-    "@ai-sdk/react": "npm:0.0.69"
+    "@ai-sdk/react": "npm:0.0.70"
     "@ai-sdk/solid": "npm:0.0.54"
     "@ai-sdk/svelte": "npm:0.0.57"
     "@ai-sdk/ui-utils": "npm:0.0.50"
@@ -11832,7 +11833,7 @@ __metadata:
       optional: true
     zod:
       optional: true
-  checksum: 10/219b67e5ae0b3a5924acfae29318cd0069d0bf877ab027b967908ccc6d08e07d6f5f0a7ebc2c47858878c7696da65a077dc314677e5d76ecf39a517c38f2b301
+  checksum: 10/10c73b0e761c9a15e6a92605460f4c453870603e951f5eeaa4c55045c9ec5572affd4608f9c8434b674800f77bc6317cbccbf8edbd0d4cb2e5d61a69227ad7e0
   languageName: node
   linkType: hard
 
@@ -12072,7 +12073,7 @@ __metadata:
     "@strapi/plugin-users-permissions": "npm:^4.25.15"
     "@strapi/provider-email-nodemailer": "npm:^4.25.15"
     "@strapi/strapi": "npm:^4.25.15"
-    apify-client: "npm:^2.9.7"
+    apify-client: "npm:^2.10.0"
     cheerio: "npm:^1.0.0"
     pg: "npm:^8.13.1"
     react: "npm:^18.3.1"
@@ -12087,9 +12088,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"apify-client@npm:^2.9.7":
-  version: 2.9.7
-  resolution: "apify-client@npm:2.9.7"
+"apify-client@npm:^2.10.0":
+  version: 2.10.0
+  resolution: "apify-client@npm:2.10.0"
   dependencies:
     "@apify/consts": "npm:^2.25.0"
     "@apify/log": "npm:^2.2.6"
@@ -12101,7 +12102,7 @@ __metadata:
     ow: "npm:^0.28.2"
     tslib: "npm:^2.5.0"
     type-fest: "npm:^4.0.0"
-  checksum: 10/cb45801fe3838de9e4c67074279ae3635e6ebb646a47d6b0399051197106af69b36e77d05b4006b81805d71b8f0327caa383941ea15a4bd7d813020f620d5777
+  checksum: 10/37217067cacb2769149e18facb6ec0fb1240f21a1fbe8f503c604c7e8688e51e07c14e69ad1af0c072499351d8b12bb8044e8bbedb17ee9426e06f0fe54c1c06
   languageName: node
   linkType: hard
 
@@ -12449,10 +12450,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"attr-accept@npm:^2.2.2":
-  version: 2.2.2
-  resolution: "attr-accept@npm:2.2.2"
-  checksum: 10/c867ed41ed749988ad2a6fc70eb2498b9c3c2d58aaad2a8d05422a383058f9d29e50c4bca363c5ee7433df738a7920cc95377bbce8678e817fb498299dd82010
+"attr-accept@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "attr-accept@npm:2.2.4"
+  checksum: 10/2839a5740c8bf8ea30f84d4da850b8a31d766be787fbaf45efb94b5a2292781abfa93d274f585c6c0e64dad0e9c0b5c53ae9849c7272f0cf1f2d643a75cc166e
   languageName: node
   linkType: hard
 
@@ -17347,7 +17348,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fc-turbo@workspace:."
   dependencies:
-    "@ai-sdk/openai": "npm:^0.0.70"
+    "@ai-sdk/openai": "npm:^0.0.71"
     "@chakra-ui/next-js": "npm:^2.2.0"
     "@chakra-ui/react": "npm:^2.8.2"
     "@chakra-ui/storybook-addon": "npm:^5.1.0"
@@ -17401,7 +17402,7 @@ __metadata:
     "@vercel/edge-config": "npm:^1.3.0"
     "@vercel/kv": "npm:^3.0.0"
     "@vercel/og": "npm:^0.6.3"
-    ai: "npm:^3.4.30"
+    ai: "npm:^3.4.31"
     axios: "npm:^1.7.7"
     chakra-react-select: "npm:4.9.2"
     cookies-next: "npm:^4.3.0"
@@ -17438,7 +17439,7 @@ __metadata:
     qs: "npm:^6.13.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-    react-dropzone: "npm:^14.2.10"
+    react-dropzone: "npm:^14.3.1"
     react-headroom: "npm:^3.2.1"
     react-hook-form: "npm:7.53.1"
     react-hook-form-persist: "npm:^3.0.0"
@@ -17468,7 +17469,7 @@ __metadata:
     typescript: "npm:5.5.4"
     usehooks-ts: "npm:^3.1.0"
     web-push: "npm:^3.6.7"
-    webpack: "npm:^5.96.0"
+    webpack: "npm:^5.96.1"
     yup: "npm:^1.4.0"
     yup-locales: "npm:^1.2.28"
     yup-phone-lite: "npm:^2.0.1"
@@ -17538,12 +17539,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"file-selector@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "file-selector@npm:0.6.0"
+"file-selector@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "file-selector@npm:1.2.0"
   dependencies:
-    tslib: "npm:^2.4.0"
-  checksum: 10/6add4098ae07fd1e9050b1e8d3fd9f128680c1d6648c0676af54ace4586e6e5bfcb8fdfa45b69e9131ffd8175bf630d54a445a5facf9be244f85b99ce309183e
+    tslib: "npm:^2.7.0"
+  checksum: 10/4d5c8a655d0365113ad5b2a22cf9538e1012f5f480e657086607010eb32ca5afd6b84cc62afa8cdd401135bdae9b263940cbec40105191ddf8a811665f0868ee
   languageName: node
   linkType: hard
 
@@ -26075,16 +26076,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dropzone@npm:^14.2.10":
-  version: 14.2.10
-  resolution: "react-dropzone@npm:14.2.10"
+"react-dropzone@npm:^14.3.1":
+  version: 14.3.1
+  resolution: "react-dropzone@npm:14.3.1"
   dependencies:
-    attr-accept: "npm:^2.2.2"
-    file-selector: "npm:^0.6.0"
+    attr-accept: "npm:^2.2.4"
+    file-selector: "npm:^1.2.0"
     prop-types: "npm:^15.8.1"
   peerDependencies:
     react: ">= 16.8 || 18.0.0"
-  checksum: 10/39ba14b2b34d6784164955f201bd7168b6a4b7a0b1625de743054667e5e04b8113fca565c347661adcb90de29e9b40a6036a5a4719939a80ac8999bc42779561
+  checksum: 10/5a182e30dffb069d489499861c92923792b6ef2fa85d2385d74f8c8921674b37de84f68aea9762e98ff94e2d21f9e8064467a30f288511573cd4aa6ba2089328
   languageName: node
   linkType: hard
 
@@ -29591,6 +29592,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"throttleit@npm:2.1.0":
+  version: 2.1.0
+  resolution: "throttleit@npm:2.1.0"
+  checksum: 10/a2003947aafc721c4a17e6f07db72dc88a64fa9bba0f9c659f7997d30f9590b3af22dadd6a41851e0e8497d539c33b2935c2c7919cf4255922509af6913c619b
+  languageName: node
+  linkType: hard
+
 "through2@npm:^2.0.1, through2@npm:^2.0.3, through2@npm:~2.0.3":
   version: 2.0.5
   resolution: "through2@npm:2.0.5"
@@ -29982,6 +29990,13 @@ __metadata:
   version: 2.6.3
   resolution: "tslib@npm:2.6.3"
   checksum: 10/52109bb681f8133a2e58142f11a50e05476de4f075ca906d13b596ae5f7f12d30c482feb0bff167ae01cfc84c5803e575a307d47938999246f5a49d174fc558c
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.7.0":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
   languageName: node
   linkType: hard
 
@@ -31351,10 +31366,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.96.0":
-  version: 5.96.0
-  resolution: "webpack@npm:5.96.0"
+"webpack@npm:^5.96.1":
+  version: 5.96.1
+  resolution: "webpack@npm:5.96.1"
   dependencies:
+    "@types/eslint-scope": "npm:^3.7.7"
     "@types/estree": "npm:^1.0.6"
     "@webassemblyjs/ast": "npm:^1.12.1"
     "@webassemblyjs/wasm-edit": "npm:^1.12.1"
@@ -31382,7 +31398,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 10/b9a34539450c51d069d37fed89569f8115516d731326153251a636b25811c3860f972b4d14a4bb1b887be2a41812d4c2a15f3f269bbf9420810e9d5402c3551f
+  checksum: 10/d3419ffd198252e1d0301bd0c072cee93172f3e47937c745aa8202691d2f5d529d4ba4a1965d1450ad89a1bcd3c1f70ae09e57232b0d01dd38d69c1060e964d5
   languageName: node
   linkType: hard
 
