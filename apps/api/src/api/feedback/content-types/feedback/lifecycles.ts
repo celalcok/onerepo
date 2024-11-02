@@ -16,6 +16,11 @@ export default {
         const art = populatedFeedback.art
         const artist = art.artist
 
+        if (process.env.NEXT_PUBLIC_ENVIRONMENT !== 'production') {
+          return { message: 'Email sent (Dev mode)' }
+        }
+
+        // TODO: Use sendReactEmail
         strapi.plugins['email'].services.email.send({
           to: artist.email,
           from: process.env.SMTP_USERNAME,

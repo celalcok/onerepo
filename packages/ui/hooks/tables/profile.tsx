@@ -1,14 +1,15 @@
-import { ThemeTypings } from '@chakra-ui/react'
+import { Icon, ThemeTypings } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
+import { FaRegFilePdf } from 'react-icons/fa6'
 
 import type {
-  Profile,
-  Role,
-  User,
   Job,
   Platform,
+  Profile,
   ProfileStatus,
+  Role,
+  User,
 } from '@fc/types'
 
 import type { WTableProps } from '../../components/WTable'
@@ -36,19 +37,29 @@ export const useProfileColumns = (): WTableProps<
       },
     },
     {
+      accessorKey: 'volunteerForm',
+      label: 'form',
+      transform: value => value && <Icon as={FaRegFilePdf} />,
+    },
+    {
+      accessorKey: 'cv',
+      label: 'cv',
+      transform: value => value && <Icon as={FaRegFilePdf} />,
+    },
+    {
       accessorKey: 'profileStatus',
       type: 'badge',
+      transform: value => t(value as ProfileStatus),
       componentProps: value => {
-        const colorScheme: Record<ProfileStatus, ThemeTypings['colorSchemes']> =
-          {
-            pending: 'orange', // 'orange
-            accepted: 'blue',
-            rejected: 'red',
-            'in-progress': 'purple',
-            left: 'gray',
-            awaiting: 'yellow',
-            approved: 'green',
-          }
+        const colorScheme: Record<string, ThemeTypings['colorSchemes']> = {
+          [t('pending')]: 'orange', // 'orange
+          [t('accepted')]: 'blue',
+          [t('rejected')]: 'red',
+          [t('in-progress')]: 'purple',
+          [t('left')]: 'gray',
+          [t('awaiting')]: 'yellow',
+          [t('approved')]: 'green',
+        }
 
         return {
           variant: 'outline',
@@ -106,7 +117,11 @@ export const useProfileColumns = (): WTableProps<
     { accessorKey: 'email', sortable: true },
     { accessorKey: 'availableHours', sortable: true },
     { accessorKey: 'phone' },
-    { accessorKey: 'country', sortable: true },
+    {
+      accessorKey: 'address',
+      label: 'country',
+      transform: value => (value as Profile['address'])?.country,
+    },
     { accessorKey: 'createdAt', type: 'date', sortable: true },
   ]
 }

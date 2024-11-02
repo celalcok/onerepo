@@ -117,7 +117,11 @@ export const AdminLoginForm = () => {
               {loginMutation.isError &&
                 ((loginMutation.error as any)?.response?.data?.type ===
                 'unauthorized' ? (
-                  <Text fontSize={'sm'} color={'red.500'}>
+                  <Text
+                    data-testid="error-login"
+                    fontSize={'sm'}
+                    color={'red.500'}
+                  >
                     <Trans
                       i18nKey="login.error.unauthorized"
                       components={{
@@ -133,7 +137,7 @@ export const AdminLoginForm = () => {
                     />
                   </Text>
                 ) : (
-                  <Text data-testid="login-error" color="red.500" fontSize="sm">
+                  <Text data-testid="error-login" color="red.500" fontSize="sm">
                     {(loginMutation.error as any)?.response?.data?.message ||
                       'An error occured'}
                   </Text>

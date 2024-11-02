@@ -1,7 +1,7 @@
 import { Category } from './category'
 import { Collection } from './collection'
 import { Comment } from './comment'
-import { Expand } from './common'
+import { ApprovalStatus, Expand } from './common'
 import { Feedback } from './feedback'
 import { UploadFile } from './file'
 import { Profile } from './profile'
@@ -17,7 +17,7 @@ type ArtBase = StrapiBase & {
   description_en: string
   description_nl: string
   description_tr: string
-  approvalStatus: string
+  approvalStatus: ApprovalStatus
   isLiked?: boolean
 }
 

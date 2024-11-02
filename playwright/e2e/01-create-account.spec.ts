@@ -7,7 +7,7 @@ test.beforeEach(async ({ registerPage }) => {
   await registerPage.navigateToRegister('kunsthalte')
 })
 
-test.describe('01. Create Account', () => {
+test.describe('01. Create Account', { tag: ['@mutation'] }, () => {
   test('TC-01: should register', async ({ registerPage, layoutPage }) => {
     const { name, username, email, password } = generateRandomUser()
 

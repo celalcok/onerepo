@@ -4,6 +4,7 @@ import {
   Box,
   Drawer,
   DrawerBody,
+  DrawerCloseButton,
   DrawerContent,
   DrawerOverlay,
   Grid,
@@ -73,6 +74,7 @@ export const PostMaker: FC<PostMakerProps> = ({ isIosSafari }) => {
       >
         <DrawerOverlay />
         <DrawerContent>
+          <DrawerCloseButton />
           <DrawerBody background={'gray.50'} p={4}>
             <PostSentenceRefDrawer />
           </DrawerBody>
