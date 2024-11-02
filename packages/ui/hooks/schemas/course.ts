@@ -19,8 +19,8 @@ export const useCourseSchema = () => {
     instructor: yup.string().required(),
     quota: yup.number(),
     price: yup.number(),
-    startDate: yup.date().required(),
-    endDate: yup.date().required(),
+    startDate: yup.string().required(), // basically this was the fix.
+    endDate: yup.string().required(),
     lastRegisterDate: yup.date().required(),
     isOnline: yup.bool(),
     image: yup.mixed().required(),

@@ -48,8 +48,8 @@ export class CourseLogic {
     this.profile = profile
     this.myApplication = this.profile
       ? this.courseApplicants.find(
-          application => application.profile?.id === this.profile!.id,
-        )
+        application => application.profile?.id === this.profile!.id,
+      )
       : undefined
     this.myInstallments = this.calculateInstallments()
     this.paidInstallments = this.myInstallments.filter(i => !!i.payment)
