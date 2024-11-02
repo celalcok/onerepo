@@ -18,7 +18,7 @@ export const NotificationsTab = () => {
   )
   const [isLoading, setIsLoading] = useState(false)
 
-  //! isSubsribed from webPushContext returns false information
+  // ! isSubsribed from webPushContext returns false information
   // const { isSubscribed, isSupported } = useWebPushContext()
   const subscriberId = profile?.subscriber?.id
   const isSubscribed = !!subscriberId
@@ -112,8 +112,8 @@ export const NotificationsTab = () => {
         p={2}
         rounded="8px"
       >
-        <FormLabel fontSize="larger" mb={0} onClick={() => {}}>
-          Notifications
+        <FormLabel fontSize="larger" mb={0} onClick={() => { }}>
+          {t('notifications')}
         </FormLabel>
         <Switch
           id="notifications-switch"
