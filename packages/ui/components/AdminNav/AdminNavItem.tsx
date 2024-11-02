@@ -37,7 +37,7 @@ export const AdminNavItem: FC<AdminNavItemProps> = ({
   return (
     <Box w="full">
       <NavLink
-        data-testid={id}
+        data-testid={`link-${id}`}
         href={link}
         justifyContent={'start'}
         leftIcon={icon}

@@ -8,6 +8,8 @@ test.afterEach(async ({ page }) => {
   await page.close()
 })
 
+const VISITOR_USERNAME = 'visitor'
+
 test.describe('07. Photo Arts', () => {
   // Clear browser context before each test
   test.beforeEach(async ({ context }) => {
@@ -21,7 +23,7 @@ test.describe('07. Photo Arts', () => {
     layoutPage,
   }) => {
     await layoutPage.gotoLogin('kunsthalte')
-    await loginPage.login('visitor', 'Test?123')
+    await loginPage.login(VISITOR_USERNAME)
 
     await layoutPage.gotoPage('arts')
 
@@ -34,7 +36,7 @@ test.describe('07. Photo Arts', () => {
     layoutPage,
   }) => {
     await layoutPage.gotoLogin('kunsthalte')
-    await loginPage.login('visitor', 'Test?123')
+    await loginPage.login(VISITOR_USERNAME)
 
     await layoutPage.gotoPage('arts')
     await artsPage.chooseTheFirstPhoto()
@@ -48,7 +50,7 @@ test.describe('07. Photo Arts', () => {
     loginPage,
   }) => {
     await layoutPage.gotoLogin('kunsthalte')
-    await loginPage.login('visitor', 'Test?123')
+    await loginPage.login(VISITOR_USERNAME)
 
     await layoutPage.gotoPage('arts')
     await artsPage.chooseTheFirstPhoto()
@@ -68,7 +70,7 @@ test.describe('07. Photo Arts', () => {
 
       await page.goto(url, { waitUntil: 'domcontentloaded' })
       await layoutPage.gotoLogin('kunsthalte')
-      await loginPage.login('visitor', 'Test?123')
+      await loginPage.login(VISITOR_USERNAME)
 
       await layoutPage.gotoPage('arts')
       await artsPage.chooseTheFirstPhoto()

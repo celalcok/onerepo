@@ -77,7 +77,7 @@ export const NotificationModal = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{t('never-miss-events')}</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton data-testid="button-close-notification-modal" />
           <ModalBody>
             <Stack>
               <Text>{t('sub-to-notifications')}</Text>

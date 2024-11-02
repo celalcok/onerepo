@@ -20,8 +20,7 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { BiNotificationOff } from 'react-icons/bi'
-import { FaArrowLeft, FaUser } from 'react-icons/fa'
-import { FaGear } from 'react-icons/fa6'
+import { FaArrowLeft, FaUser, FaUserCog } from 'react-icons/fa'
 import { HiMenu } from 'react-icons/hi'
 import { MdOutlineNotifications } from 'react-icons/md'
 
@@ -101,14 +100,16 @@ export const AdminHeader: FC<AdminHeaderProps> = ({ hasBackButton, title }) => {
       <HStack flexShrink={0}>
         {user && (
           <>
-            <IconButton
-              aria-label="profile"
-              icon={<FaGear />}
-              variant="outline"
-              rounded="full"
-              colorScheme={'gray'}
-              onClick={onOpenProfile}
-            />
+            <Tooltip label="Profile Settings">
+              <IconButton
+                aria-label="profile settings"
+                icon={<FaUserCog />}
+                variant="outline"
+                rounded="full"
+                colorScheme={'gray'}
+                onClick={onOpenProfile}
+              />
+            </Tooltip>
             <Modal
               isOpen={isOpenProfile}
               onClose={onCloseProfile}
@@ -128,24 +129,31 @@ export const AdminHeader: FC<AdminHeaderProps> = ({ hasBackButton, title }) => {
         )}
         {user && <DevMailContainer />}
         {user && (
-          <IconButton
-            aria-label="notifications"
-            icon={<MdOutlineNotifications />}
-            variant="outline"
-            rounded="full"
-            colorScheme={'gray'}
-          />
-        )}
-        {process.env.NEXT_PUBLIC_ENVIRONMENT !== 'production' &&
-          isSubscribed && (
+          <Tooltip label="Notifications">
             <IconButton
-              aria-label="notifications-off"
-              icon={<BiNotificationOff />}
+              aria-label="notifications"
+              icon={<MdOutlineNotifications />}
               variant="outline"
               rounded="full"
               colorScheme={'gray'}
-              onClick={handleUnsubscribe}
             />
+          </Tooltip>
+        )}
+        {process.env.NEXT_PUBLIC_ENVIRONMENT !== 'production' &&
+          isSubscribed && (
+            <Tooltip
+              label="Unsubscribe from notifications"
+              aria-label="unsubscribe"
+            >
+              <IconButton
+                aria-label="notifications-off"
+                icon={<BiNotificationOff />}
+                variant="outline"
+                rounded="full"
+                colorScheme={'gray'}
+                onClick={handleUnsubscribe}
+              />
+            </Tooltip>
           )}
         <LanguageSwitcher responsive />
         <CreateModelButton />

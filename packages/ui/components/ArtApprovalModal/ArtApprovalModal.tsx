@@ -95,11 +95,7 @@ export const ArtApprovalModal: FC<ArtApprovalTypes> = ({
                               : 'yellow'
                         }
                       >
-                        {art.approvalStatus === 'approved'
-                          ? 'Approved'
-                          : art.approvalStatus === 'rejected'
-                            ? 'Rejected'
-                            : 'Pending'}
+                        {t(art.approvalStatus)}
                       </Tag>
                     </HStack>
 
