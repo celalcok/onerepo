@@ -112,7 +112,7 @@ export const NotificationsTab = () => {
         p={2}
         rounded="8px"
       >
-        <FormLabel fontSize="larger" mb={0} onClick={() => { }}>
+        <FormLabel fontSize="larger" mb={0} onClick={() => {}}>
           {t('notifications')}
         </FormLabel>
         <Switch
