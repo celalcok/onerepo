@@ -59,9 +59,10 @@ export const useDefaultValues = <T extends StrapiModel>(
 
         // Strapi requires date to be string unless it has a time
         if (date && date instanceof Date) {
-          throw new Error('Date should be a string')
+          console.warn('Date field should be string unless it has a time')
         }
       }
+
       if (field.type === 'datetime-local') {
         const dateTime = model[field.name as keyof T] as string | null
 
