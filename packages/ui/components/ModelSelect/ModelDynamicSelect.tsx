@@ -36,9 +36,9 @@ export const ModelDynamicSelect = <T extends StrapiModel>({
   })
 
   const models = modelsQuery.data?.data?.map((model: any) => ({
-    name_en: model.title_en || model.name_en,
-    name_tr: model.title_tr || model.name_tr,
-    name_nl: model.title_nl || model.name_nl,
+    name_en: model.title_en || model.name_en || model.description,
+    name_tr: model.title_tr || model.name_tr || model.description,
+    name_nl: model.title_nl || model.name_nl || model.description,
     ...model,
   }))
 

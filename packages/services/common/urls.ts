@@ -58,4 +58,6 @@ export const endpointsWithPublicationState: StrapiEndpoint[] = [
   'posts',
   'presentations',
   'timelines',
+  'victims',
+  'prisons',
 ]

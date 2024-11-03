@@ -13,12 +13,15 @@ import { useCourseColumns } from './tables/courses'
 import { useDonationColumns } from './tables/donation'
 import { useFoundationsColumns } from './tables/foundation'
 import { useHashtagColumns } from './tables/hashtag'
+import { useMentionsColumns } from './tables/mention'
 import { useNotificationColumns } from './tables/notification'
 import { usePaymentColumns } from './tables/payment'
 import { usePostColumns } from './tables/post'
+import { usePrisonsColumns } from './tables/prison'
 import { useProfileColumns } from './tables/profile'
 import { useUserColumns } from './tables/user'
 import { useUserFeedbacksColumns } from './tables/userFeedbacks'
+import { useVictimsColumns } from './tables/victim'
 import { WTableProps } from '../components/WTable'
 
 export const useColumns = <T extends StrapiModel>(): {
@@ -40,6 +43,9 @@ export const useColumns = <T extends StrapiModel>(): {
     donates: useDonationColumns() as WTableProps<T>['columns'],
     foundations: useFoundationsColumns() as WTableProps<T>['columns'],
     hashtags: useHashtagColumns() as WTableProps<T>['columns'],
+    mentions: useMentionsColumns() as WTableProps<T>['columns'],
+    victims: useVictimsColumns() as WTableProps<T>['columns'],
+    prisons: usePrisonsColumns() as WTableProps<T>['columns'],
     notifications: useNotificationColumns() as WTableProps<T>['columns'],
     payments: usePaymentColumns() as WTableProps<T>['columns'],
     posts: usePostColumns() as WTableProps<T>['columns'],

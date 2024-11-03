@@ -15,11 +15,13 @@ import type {
   CourseApplication,
   FormFields,
   Hashtag,
+  Mention,
   Platform,
   Post,
   Profile,
   StrapiModel,
   User,
+  Victim,
 } from '@fc/types'
 import { getMinuteDifferenceAmsterdamBetweenUTC } from '@fc/utils/timeDifference'
 
@@ -42,6 +44,8 @@ export const useDefaultValues = <T extends StrapiModel>(
   const postModel = model as Post
   const profileModel = model as Profile
   const userModel = model as User
+  const victimModel = model as Victim
+  const mentionModel = model as Mention
 
   const { locale } = useRouter()
 
@@ -113,6 +117,13 @@ export const useDefaultValues = <T extends StrapiModel>(
         return
       }
 
+      if (field.type === 'json') {
+        defaults[field.name] =
+          JSON.stringify(model[field.name as keyof T], null, 2) || ''
+
+        return
+      }
+
       switch (field.name) {
         case 'mentions':
           defaults.mentions =
@@ -151,6 +162,30 @@ export const useDefaultValues = <T extends StrapiModel>(
             label: postModel.hashtag?.title || '',
             value: postModel.hashtag?.id.toString() || '',
           }
+          break
+
+        case 'hashtags':
+          defaults.hashtags =
+            mentionModel.hashtags?.map(h => ({
+              label: h.title || '',
+              value: h.id.toString() || '',
+            })) || []
+          break
+
+        case 'contents':
+          defaults.contents =
+            victimModel.contents?.map(c => ({
+              label: c.title || '',
+              value: c.id.toString() || '',
+            })) || []
+          break
+
+        case 'posts':
+          defaults.posts =
+            victimModel.posts?.map(p => ({
+              label: p.description || '',
+              value: p.id.toString() || '',
+            })) || []
           break
 
         case 'platform':

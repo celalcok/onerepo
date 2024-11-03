@@ -11,7 +11,7 @@ import {
 import { CgHashtag, CgProfile } from 'react-icons/cg'
 import { FaTimeline } from 'react-icons/fa6'
 import { FiActivity, FiUsers } from 'react-icons/fi'
-import { GiHumanPyramid } from 'react-icons/gi'
+import { GiHumanPyramid, GiPrisoner } from 'react-icons/gi'
 import { HiOutlineNewspaper } from 'react-icons/hi'
 import { LuFileArchive } from 'react-icons/lu'
 import {
@@ -31,10 +31,12 @@ import {
   TbChecks,
   TbClock,
   TbMilitaryRank,
+  TbPrison,
   TbThumbUp,
   TbWriting,
   TbX,
 } from 'react-icons/tb'
+import { VscMention } from 'react-icons/vsc'
 
 import { DashboardRoute } from '@fc/config/dashboardRoutes'
 import { useAuthContext } from '@fc/context/auth'
@@ -173,23 +175,50 @@ export const useAdminNav = () => {
         ],
       },
       {
+        id: 'post-maker',
+        label: t('post-maker'),
+        icon: <TbWriting />,
+        submenu: [
+          {
+            id: 'hashtags',
+            label: t('hashtags'),
+            icon: <CgHashtag />,
+            link: '/hashtags',
+          },
+          {
+            id: 'hashtag-posts',
+            label: t('hashtagPosts'),
+            icon: <TbBrandTwitter />,
+            link: '/posts',
+          },
+          {
+            id: 'mentions',
+            label: t('mentions'),
+            icon: <VscMention />,
+            link: '/mentions',
+          },
+          {
+            id: 'victims',
+            label: t('victims'),
+            icon: <GiPrisoner />,
+            link: '/victims',
+          },
+          {
+            id: 'prisons',
+            label: t('prisons'),
+            icon: <TbPrison />,
+            link: '/prisons',
+          },
+        ],
+      },
+
+      {
         id: 'art-collections',
         label: t('art.collections'),
         link: '/collections',
         icon: <BsCollection />,
       },
-      {
-        id: 'hashtags',
-        label: t('hashtags'),
-        icon: <CgHashtag />,
-        link: '/hashtags',
-      },
-      {
-        id: 'hashtag-posts',
-        label: t('hashtagPosts'),
-        icon: <TbBrandTwitter />,
-        link: '/posts',
-      },
+
       {
         id: 'categories',
         label: t('categories'),

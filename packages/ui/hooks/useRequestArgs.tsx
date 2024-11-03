@@ -87,6 +87,76 @@ export const useRequestArgs = <
         },
       ],
     },
+    mentions: {
+      populate: ['categories', 'hashtags'],
+      searchFields: ['username'],
+      relationFilters: [
+        {
+          endpoint: 'categories',
+          field: 'categories',
+          label: t('category'),
+        },
+      ],
+    },
+    victims: {
+      searchFields: [
+        'name',
+        'description_en',
+        'description_nl',
+        'description_tr',
+      ],
+      populate: ['prisons', 'categories', 'contents', 'image', 'posts'],
+      booleanFilters: [
+        {
+          field: 'sick',
+          label: t('victim.label.sick'),
+          operator: '$eq',
+        },
+        {
+          field: 'deceased',
+          label: t('victim.label.deceased'),
+          operator: '$eq',
+        },
+        {
+          field: 'pregnant',
+          label: t('victim.label.pregnant'),
+          operator: '$eq',
+        },
+        {
+          field: 'elderly',
+          label: t('victim.label.elderly'),
+          operator: '$eq',
+        },
+        {
+          field: 'baby',
+          label: t('victim.label.baby'),
+          operator: '$eq',
+        },
+        {
+          field: 'noshare',
+          label: t('victim.label.no-share'),
+          operator: '$eq',
+        },
+      ],
+      relationFilters: [
+        {
+          endpoint: 'prisons',
+          field: 'name',
+          label: t('prisons'),
+        },
+      ],
+    },
+    prisons: {
+      searchFields: ['name', 'city'],
+      populate: ['images', 'contents', 'posts'],
+      relationFilters: [
+        {
+          endpoint: 'prisons',
+          field: 'city',
+          label: t('city'),
+        },
+      ],
+    },
     profiles: {
       booleanFilters: [
         {

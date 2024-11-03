@@ -199,6 +199,13 @@ export const ModelEditForm = <T extends StrapiModel>({
       // TODO: Handle block fields
       const field = fields.find(f => f.name === key)
 
+      if (field?.type === 'json') {
+        return {
+          ...acc,
+          [key]: JSON.parse(value as string),
+        }
+      }
+
       // handle block fields
       if (field?.type === 'block') {
         return {
@@ -498,7 +505,8 @@ export const ModelEditForm = <T extends StrapiModel>({
               return (
                 <Stack key={index}>
                   <FormItem
-                    {...(field.type === 'textarea' && { as: Textarea })}
+                    {...((field.type === 'textarea' ||
+                      field.type === 'json') && { as: Textarea })}
                     name={field.name as string}
                     type={inputType}
                     isRequired={field.isRequired}
