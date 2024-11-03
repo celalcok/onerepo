@@ -109,7 +109,7 @@ export const AdminHeader: FC<AdminHeaderProps> = ({ hasBackButton, title }) => {
         )}
         {user && <DevMailContainer />}
         {user && (
-          <Tooltip label='Notifications'>
+          <Tooltip label="Notifications">
             <IconButton
               aria-label="notifications"
               icon={<MdOutlineNotifications />}
