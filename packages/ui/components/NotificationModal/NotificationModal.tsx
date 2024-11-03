@@ -12,6 +12,7 @@ import {
   Stack,
   Text,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useCookie } from 'react-use'
@@ -27,6 +28,7 @@ export const NotificationModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { user, site } = useAuthContext()
   const { isSubscribed, isSupported } = useWebPushContext()
+  const toast = useToast()
 
   const [cookieNotification, updateCookieNotification] = useCookie(
     CookieKey.PUSH_NOTIFICATIONS_SUBSCRIBED,
@@ -36,6 +38,19 @@ export const NotificationModal = () => {
     useSubscribePushNotificationMutation()
 
   const handleSubscribe = async () => {
+    if (Notification.permission === 'denied') {
+      toast({
+        title: 'Notifications are blocked',
+        description:
+          'Please enable notifications in your browser settings to receive notifications.',
+        status: 'warning',
+        duration: 10000,
+        isClosable: true,
+      })
+
+      return
+    }
+
     subscribePushNotificationMutation.mutateAsync(undefined, {
       onSuccess: () => {
         updateCookieNotification('true')
