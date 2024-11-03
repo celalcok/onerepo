@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 
-import { addMinutes, format } from 'date-fns'
+import { tz } from '@date-fns/tz'
+import { format } from 'date-fns'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
@@ -21,7 +22,7 @@ import type {
   StrapiModel,
   User,
 } from '@fc/types'
-import { getMinuteDifferenceAmsterdamBetweenUTC } from '@fc/utils/timeDifference'
+import { DEFAULT_TIMEZONE } from '@fc/utils/timeDifference'
 
 import { I18nNamespaces } from '../@types/i18next'
 
@@ -52,63 +53,23 @@ export const useDefaultValues = <T extends StrapiModel>(
 
     const defaults = {} as any
 
-    const convertDate = (
-      fieldName: string | number | symbol,
-      toDateOnly: boolean,
-      date?: string | null,
-    ) => {
-      if (!date) return ''
-
-      const dateTime = new Date(date)
-      if (
-        fieldName !== 'createdAt' &&
-        fieldName !== 'updatedAt' &&
-        fieldName !== 'publishedAt'
-      ) {
-        /*
-          The underlying math and logic can be explained as follows:
-
-          - The getMinuteDifferenceAmsterdamBetweenUTC(date) function calculates the minute 
-            difference between the Amsterdam time zone and UTC (Coordinated Universal Time). 
-            This difference indicates how many minutes Amsterdam is ahead of or behind UTC.
-
-          - The addMinutes(date, timeDif) function adds the calculated minute difference to 
-            the date value. This adjusts the date value to the Amsterdam time zone.
-
-          - The dateTime.setTime(amsterdamDateTime.getTime()) line assigns the adjusted date 
-            value to the dateTime object.
-          
-          The purpose of these operations is to standardize date values to the Amsterdam 
-          time zone. This is particularly important for ensuring consistency across users 
-          or systems in different time zones.
-
-          For example, if a user in Amsterdam creates a record at 14:00, it may be recorded 
-          as 13:00 in UTC. However, when the system is set to the Amsterdam time zone, 
-          the record will be displayed as 14:00.
-
-          This approach takes into account time zone differences to ensure that date values 
-          are processed correctly and consistently.
-        */
-        const timeDif = getMinuteDifferenceAmsterdamBetweenUTC(date)
-        const amsterdamDateTime = addMinutes(date, timeDif)
-        dateTime.setTime(amsterdamDateTime.getTime())
-      }
-
-      if (toDateOnly) {
-        return format(dateTime, 'yyyy-MM-dd')
-      }
-
-      return dateTime.toISOString().replace('Z', '')
-    }
-
     fields.forEach(field => {
-      if (field.type === 'date' || field.type === 'datetime-local') {
-        // this ll work for future fields too.
-        defaults[field.name] = convertDate(
-          field.name,
-          field.type === 'date',
-          model[field.name as keyof T] as string | null,
-        )
+      if (field.type === 'date') {
+        const date = model[field.name as keyof T] as string | Date | null
+
+        // Strapi requires date to be string unless it has a time
+        if (date && date instanceof Date) {
+          throw new Error('Date should be a string')
+        }
+      }
+      if (field.type === 'datetime-local') {
+        const dateTime = model[field.name as keyof T] as string | null
+
+        defaults[field.name] =
+          dateTime &&
+          format(dateTime, "yyyy-MM-dd'T'HH:mm:ss", {
+            in: tz(DEFAULT_TIMEZONE),
+          })
 
         return
       }

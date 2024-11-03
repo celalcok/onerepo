@@ -2,13 +2,13 @@ import * as yup from 'yup'
 
 import type { Activity, FormFields } from '@fc/types'
 
-import { yupMultiSelect } from './common'
+import { yupDate, yupMultiSelect } from './common'
 
 export const useActivitySchema = () => {
   return yup.object({
     title: yup.string().required(),
     description: yup.string().required(),
-    date: yup.date().required(),
+    date: yupDate.required(),
     content: yup.string().required(),
     image: yup.mixed().required(),
     platforms: yupMultiSelect,
