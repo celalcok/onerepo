@@ -117,6 +117,28 @@ export const mockify = async () => {
 
   console.log('-'.repeat(50))
 
+  console.log('Mockifying observations...')
+
+  const observations = await strapi.entityService.findMany(
+    'api::observation.observation',
+  )
+
+  for await (const observation of observations) {
+    await strapi.entityService.update(
+      'api::observation.observation',
+      observation.id,
+      {
+        data: {
+          content: faker.lorem.sentence(),
+        },
+      },
+    )
+  }
+
+  console.log(`Mocked ${observations.length} observations`)
+
+  console.log('-'.repeat(50))
+
   console.log('Mockifying donates...')
 
   const donates = await strapi.entityService.findMany('api::donate.donate')

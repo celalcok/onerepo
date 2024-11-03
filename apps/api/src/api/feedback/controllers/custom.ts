@@ -21,10 +21,11 @@ export default {
       })
     }
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NEXT_PUBLIC_ENVIRONMENT !== 'production') {
       return { message: 'Email sent (Dev mode)' }
     }
 
+    // TODO: Use sendReactEmail
     await strapi.plugins['email'].services.email.send(email)
 
     await strapi.entityService.create('api::audit-log.audit-log', {

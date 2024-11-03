@@ -1,0 +1,7 @@
+export * from './Arts'
+export * from './Contact'
+export * from './DashboardArts'
+export * from './Layout'
+export * from './Login'
+export * from './Profile'
+export * from './Register'

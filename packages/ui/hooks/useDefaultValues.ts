@@ -51,48 +51,69 @@ export const useDefaultValues = <T extends StrapiModel>(
     if (!model || !fields) return {} as T
 
     const defaults = {} as any
-    const { date, createdAt, updatedAt, publishedAt } = model as Activity
 
-    const getDate = (date?: string | null, isDateTime?: true | 'amsterdam') => {
+    const convertDate = (
+      fieldName: string | number | symbol,
+      toDateOnly: boolean,
+      date?: string | null,
+    ) => {
       if (!date) return ''
 
       const dateTime = new Date(date)
-      if (!isDateTime) return format(dateTime, 'yyyy-MM-dd')
+      if (
+        fieldName !== 'createdAt' &&
+        fieldName !== 'updatedAt' &&
+        fieldName !== 'publishedAt'
+      ) {
+        /*
+          The underlying math and logic can be explained as follows:
 
-      if (isDateTime === 'amsterdam') {
+          - The getMinuteDifferenceAmsterdamBetweenUTC(date) function calculates the minute 
+            difference between the Amsterdam time zone and UTC (Coordinated Universal Time). 
+            This difference indicates how many minutes Amsterdam is ahead of or behind UTC.
+
+          - The addMinutes(date, timeDif) function adds the calculated minute difference to 
+            the date value. This adjusts the date value to the Amsterdam time zone.
+
+          - The dateTime.setTime(amsterdamDateTime.getTime()) line assigns the adjusted date 
+            value to the dateTime object.
+          
+          The purpose of these operations is to standardize date values to the Amsterdam 
+          time zone. This is particularly important for ensuring consistency across users 
+          or systems in different time zones.
+
+          For example, if a user in Amsterdam creates a record at 14:00, it may be recorded 
+          as 13:00 in UTC. However, when the system is set to the Amsterdam time zone, 
+          the record will be displayed as 14:00.
+
+          This approach takes into account time zone differences to ensure that date values 
+          are processed correctly and consistently.
+        */
         const timeDif = getMinuteDifferenceAmsterdamBetweenUTC(date)
         const amsterdamDateTime = addMinutes(date, timeDif)
         dateTime.setTime(amsterdamDateTime.getTime())
       }
 
+      if (toDateOnly) {
+        return format(dateTime, 'yyyy-MM-dd')
+      }
+
       return dateTime.toISOString().replace('Z', '')
     }
 
-    const dateFields: Record<string, [string, string]> = {
-      date: [getDate(date), getDate(date, 'amsterdam')],
-      createdAt: [getDate(createdAt), getDate(createdAt, true)],
-      updatedAt: [getDate(updatedAt), getDate(updatedAt, true)],
-      publishedAt: [getDate(publishedAt), getDate(publishedAt, true)],
-      lastRegisterDate: [
-        getDate(courseModel.lastRegisterDate),
-        getDate(courseModel.lastRegisterDate, 'amsterdam'),
-      ],
-    }
-
     fields.forEach(field => {
-      switch (field.name) {
-        case 'date':
-        case 'createdAt':
-        case 'updatedAt':
-        case 'publishedAt':
-        case 'lastRegisterDate':
-          if (field.type === 'date') {
-            defaults[field.name] = dateFields[field.name as string][0]
-          } else if (field.type === 'datetime-local') {
-            defaults[field.name] = dateFields[field.name as string][1]
-          }
-          break
+      if (field.type === 'date' || field.type === 'datetime-local') {
+        // this ll work for future fields too.
+        defaults[field.name] = convertDate(
+          field.name,
+          field.type === 'date',
+          model[field.name as keyof T] as string | null,
+        )
 
+        return
+      }
+
+      switch (field.name) {
         case 'mentions':
           defaults.mentions =
             hashtagModel.mentions?.map(m => ({

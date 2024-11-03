@@ -115,7 +115,14 @@ export const useRequestArgs = <
           field: 'platforms',
         },
       ],
-      populate: ['user.role', 'jobs.platform', 'platforms'],
+      populate: [
+        'user.role',
+        'jobs.platform',
+        'platforms',
+        'volunteerForm',
+        'cv',
+        'address',
+      ],
       searchFields: ['name', 'email'],
     },
   }
