@@ -122,7 +122,11 @@ export const AuthModal = () => {
                 {loginMutation.isError &&
                   (loginMutation.error?.message ===
                   'Request failed with status code 401' ? (
-                    <Text fontSize={'sm'} color={'red.500'}>
+                    <Text
+                      data-testid="error-login"
+                      fontSize={'sm'}
+                      color={'red.500'}
+                    >
                       <Trans
                         i18nKey="login.error.unauthorized"
                         components={{
@@ -137,7 +141,11 @@ export const AuthModal = () => {
                       />
                     </Text>
                   ) : (
-                    <Text color="red.500" fontSize="sm">
+                    <Text
+                      data-testid="error-login"
+                      color="red.500"
+                      fontSize="sm"
+                    >
                       {loginMutation.error?.message || 'An error occured'}
                     </Text>
                   ))}
