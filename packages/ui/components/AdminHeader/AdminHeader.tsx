@@ -19,14 +19,11 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { BiNotificationOff } from 'react-icons/bi'
 import { FaArrowLeft, FaUser, FaUserCog } from 'react-icons/fa'
 import { HiMenu } from 'react-icons/hi'
 import { MdOutlineNotifications } from 'react-icons/md'
 
 import { useAuthContext } from '@fc/context/auth'
-import { useWebPushContext } from '@fc/context/webPush'
-import { useUnsubscribePushNotificationMutation } from '@fc/services/pushNotification/unsubscribePushNotification'
 
 import { AdminSidebar } from '../AdminSidebar'
 import { CreateModelButton } from '../CreateModelButton'
@@ -42,7 +39,6 @@ type AdminHeaderProps = {
 
 export const AdminHeader: FC<AdminHeaderProps> = ({ hasBackButton, title }) => {
   const { user, openAuthModal, isLoading } = useAuthContext()
-  const { isSubscribed } = useWebPushContext()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     isOpen: isOpenProfile,
@@ -52,22 +48,6 @@ export const AdminHeader: FC<AdminHeaderProps> = ({ hasBackButton, title }) => {
   const router = useRouter()
   const slugs = router.asPath.split('/')
   const parentSlug = slugs.slice(0, slugs.length - 1).join('/')
-
-  const unsubscribeNotification = useUnsubscribePushNotificationMutation()
-
-  const handleUnsubscribe = async () => {
-    if (confirm('Are you sure you want to unsubscribe?')) {
-      unsubscribeNotification.mutateAsync(undefined, {
-        onSuccess: () => {
-          // TODO: Refresh notification state
-          console.log('Unsubscribed')
-        },
-        onError: () => {
-          console.log('Error unsubscribing')
-        },
-      })
-    }
-  }
 
   return (
     <HStack
@@ -139,22 +119,6 @@ export const AdminHeader: FC<AdminHeaderProps> = ({ hasBackButton, title }) => {
             />
           </Tooltip>
         )}
-        {process.env.NEXT_PUBLIC_ENVIRONMENT !== 'production' &&
-          isSubscribed && (
-            <Tooltip
-              label="Unsubscribe from notifications"
-              aria-label="unsubscribe"
-            >
-              <IconButton
-                aria-label="notifications-off"
-                icon={<BiNotificationOff />}
-                variant="outline"
-                rounded="full"
-                colorScheme={'gray'}
-                onClick={handleUnsubscribe}
-              />
-            </Tooltip>
-          )}
         <LanguageSwitcher responsive />
         <CreateModelButton />
         {!user && (
