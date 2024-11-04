@@ -109,32 +109,32 @@ export const useRequestArgs = <
       booleanFilters: [
         {
           field: 'sick',
-          label: t('victim.label.sick'),
+          label: t('sick'),
           operator: '$eq',
         },
         {
           field: 'deceased',
-          label: t('victim.label.deceased'),
+          label: t('deceased'),
           operator: '$eq',
         },
         {
           field: 'pregnant',
-          label: t('victim.label.pregnant'),
+          label: t('pregnant'),
           operator: '$eq',
         },
         {
           field: 'elderly',
-          label: t('victim.label.elderly'),
+          label: t('elderly'),
           operator: '$eq',
         },
         {
           field: 'baby',
-          label: t('victim.label.baby'),
+          label: t('baby'),
           operator: '$eq',
         },
         {
           field: 'noshare',
-          label: t('victim.label.no-share'),
+          label: t('no-share'),
           operator: '$eq',
         },
       ],

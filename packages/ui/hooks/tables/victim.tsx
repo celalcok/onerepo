@@ -43,37 +43,37 @@ export const useVictimsColumns = (): WTableProps<Victim>['columns'] => {
           <Wrap>
             {model.resolved && (
               <Badge variant={'outline'} colorScheme={'green'}>
-                {t('victim.label.resolved')}
+                {t('resolved')}
               </Badge>
             )}
             {model.deceased && (
               <Badge variant={'outline'} colorScheme={'red'}>
-                {t('victim.label.deceased')}
+                {t('deceased')}
               </Badge>
             )}
             {model.pregnant && (
               <Badge variant={'outline'} colorScheme={'red'}>
-                {t('victim.label.pregnant')}
+                {t('pregnant')}
               </Badge>
             )}
             {model.baby && (
               <Badge variant={'outline'} colorScheme={'red'}>
-                {t('victim.label.baby')}
+                {t('baby')}
               </Badge>
             )}
             {model.sick && (
               <Badge variant={'outline'} colorScheme={'red'}>
-                {t('victim.label.sick')}
+                {t('sick')}
               </Badge>
             )}
             {model.noshare && (
               <Badge variant={'outline'} colorScheme={'red'}>
-                {t('victim.label.no-share')}
+                {t('no-share')}
               </Badge>
             )}
             {model.elderly && (
               <Badge variant={'outline'} colorScheme={'red'}>
-                {t('victim.label.elderly')}
+                {t('elderly')}
               </Badge>
             )}
           </Wrap>
