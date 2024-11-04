@@ -13,7 +13,7 @@ import { CookieKey } from '@fc/types'
 export const NotificationsTab = () => {
   const { profile, checkAuth } = useAuthContext()
   const toast = useToast()
-  const [cookieNotification, updateCookieNotification] = useCookie(
+  const [, updateCookieNotification] = useCookie(
     CookieKey.PUSH_NOTIFICATIONS_SUBSCRIBED,
   )
   const [isLoading, setIsLoading] = useState(false)
