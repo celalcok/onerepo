@@ -19,7 +19,7 @@ export const generateAccountStats = (): AccountStats => {
     replies: faker.en.number.int({ min: 200, max: 1000 }),
     retweets: faker.en.number.int({ min: 200, max: 1000 }),
     tweets: faker.en.number.int({ min: 200, max: 1000 }),
-    username: faker.en.internet.username(),
+    username: faker.en.internet.userName(),
   }
 }
 

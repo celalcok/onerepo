@@ -3,6 +3,7 @@ import type {
   AssetsTracking,
   Category,
   Mention,
+  Post,
   Profile,
   Role,
   StrapiLocale,
@@ -21,6 +22,7 @@ const mapModelToOption = (model?: StrapiModel, locale?: StrapiLocale) => {
   const modelWithLocalizedName = model as Category
   const asset = model as Asset
   const assetsTracking = model as AssetsTracking
+  const post = model as Post
 
   const localizedName = locale
     ? modelWithLocalizedName[`name_${locale}`] || profile.name
@@ -57,6 +59,11 @@ const mapModelToOption = (model?: StrapiModel, locale?: StrapiLocale) => {
   // Asset Tracking
   else if (assetsTracking.fromLocation) {
     label = `${assetsTracking?.asset?.name} - ${assetsTracking.fromLocation} > ${assetsTracking.toLocation} - ${assetsTracking.date}`
+  }
+
+  // Post
+  else if (post.description) {
+    label = post.description.slice(0, 20)
   }
 
   return { value, label }
