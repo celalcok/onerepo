@@ -4,7 +4,7 @@ import { PASSWORD } from '../constants'
 
 export const generateRandomUser = () => {
   const name = faker.person.firstName()
-  const username = faker.internet.username()
+  const username = faker.internet.userName()
   const email = faker.internet.email()
 
   // const password = faker.internet.password({

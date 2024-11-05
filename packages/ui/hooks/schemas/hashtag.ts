@@ -2,12 +2,12 @@ import * as yup from 'yup'
 
 import type { Hashtag, FormFields } from '@fc/types'
 
-import { yupMultiSelect, yupSelect } from './common'
+import { yupDateTime, yupMultiSelect, yupSelect } from './common'
 
 export const useHashtagSchema = () => {
   return yup.object({
     title: yup.string().required(),
-    date: yup.date().required(),
+    date: yupDateTime.required(),
     description: yup.string().required(),
     content: yup.string(),
     hashtagDefault: yup.string().required(),

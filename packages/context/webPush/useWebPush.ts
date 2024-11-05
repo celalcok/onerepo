@@ -17,8 +17,17 @@ export const useWebPush = (enable: boolean) => {
     if (!enable) return
 
     const registerServiceWorker = async () => {
-      if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
-        console.error('Service worker or Push is not supported')
+      if (!('serviceWorker' in navigator)) {
+        console.error('Service Worker is not supported on this browser')
+        setIsSupported(false)
+
+        return
+      } else {
+        setIsSupported(true)
+      }
+
+      if (!('PushManager' in window)) {
+        console.error('PushManager is not supported on this browser')
         setIsSupported(false)
 
         return

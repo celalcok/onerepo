@@ -2,6 +2,8 @@ import * as yup from 'yup'
 
 import type { FormFields, RecommendedTopic } from '@fc/types'
 
+import { yupDateTime } from './common'
+
 export const useTopicSchema = () => {
   return yup.object({
     title: yup.string().required(),
@@ -9,7 +11,7 @@ export const useTopicSchema = () => {
     description: yup.string().required(),
     publisher: yup.string().required(),
     category: yup.string(),
-    time: yup.date(),
+    time: yupDateTime,
     image: yup.mixed(),
   })
 }

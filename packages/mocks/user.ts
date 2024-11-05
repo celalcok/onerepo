@@ -5,7 +5,7 @@ import { generateRole, RoleType } from './role'
 
 export const generateUser = (role: RoleType): User => ({
   id: faker.en.number.int(),
-  username: faker.en.internet.username(),
+  username: faker.en.internet.userName(),
   email: faker.en.internet.email(),
   blocked: false,
   confirmed: true,

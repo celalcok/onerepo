@@ -2,7 +2,7 @@ import * as yup from 'yup'
 
 import type { Course, FormFields } from '@fc/types'
 
-import { yupSelect } from './common'
+import { yupDate, yupDateTime, yupSelect } from './common'
 
 export const useCourseSchema = () => {
   return yup.object({
@@ -19,9 +19,9 @@ export const useCourseSchema = () => {
     instructor: yup.string().required(),
     quota: yup.number(),
     price: yup.number(),
-    startDate: yup.date().required(),
-    endDate: yup.date().required(),
-    lastRegisterDate: yup.date().required(),
+    startDate: yupDate.required(),
+    endDate: yupDate.required(),
+    lastRegisterDate: yupDateTime.required(),
     isOnline: yup.bool(),
     image: yup.mixed().required(),
     platform: yupSelect,

@@ -12,6 +12,7 @@ type FormTextFields = {
     | 'number-input'
     | 'text'
     | 'textarea'
+    | 'json'
 }
 
 type FormSelectFields = {

@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 
-import { addMinutes, format } from 'date-fns'
+import { tz } from '@date-fns/tz'
+import { format } from 'date-fns'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
@@ -15,13 +16,15 @@ import type {
   CourseApplication,
   FormFields,
   Hashtag,
+  Mention,
   Platform,
   Post,
   Profile,
   StrapiModel,
   User,
+  Victim,
 } from '@fc/types'
-import { getMinuteDifferenceAmsterdamBetweenUTC } from '@fc/utils/timeDifference'
+import { DEFAULT_TIMEZONE } from '@fc/utils/timeDifference'
 
 import { I18nNamespaces } from '../@types/i18next'
 
@@ -42,6 +45,8 @@ export const useDefaultValues = <T extends StrapiModel>(
   const postModel = model as Post
   const profileModel = model as Profile
   const userModel = model as User
+  const victimModel = model as Victim
+  const mentionModel = model as Mention
 
   const { locale } = useRouter()
 
@@ -51,48 +56,37 @@ export const useDefaultValues = <T extends StrapiModel>(
     if (!model || !fields) return {} as T
 
     const defaults = {} as any
-    const { date, createdAt, updatedAt, publishedAt } = model as Activity
-
-    const getDate = (date?: string | null, isDateTime?: true | 'amsterdam') => {
-      if (!date) return ''
-
-      const dateTime = new Date(date)
-      if (!isDateTime) return format(dateTime, 'yyyy-MM-dd')
-
-      if (isDateTime === 'amsterdam') {
-        const timeDif = getMinuteDifferenceAmsterdamBetweenUTC(date)
-        const amsterdamDateTime = addMinutes(date, timeDif)
-        dateTime.setTime(amsterdamDateTime.getTime())
-      }
-
-      return dateTime.toISOString().replace('Z', '')
-    }
-
-    const dateFields: Record<string, [string, string]> = {
-      date: [getDate(date), getDate(date, 'amsterdam')],
-      createdAt: [getDate(createdAt), getDate(createdAt, true)],
-      updatedAt: [getDate(updatedAt), getDate(updatedAt, true)],
-      publishedAt: [getDate(publishedAt), getDate(publishedAt, true)],
-      lastRegisterDate: [
-        getDate(courseModel.lastRegisterDate),
-        getDate(courseModel.lastRegisterDate, 'amsterdam'),
-      ],
-    }
 
     fields.forEach(field => {
-      switch (field.name) {
-        case 'date':
-        case 'createdAt':
-        case 'updatedAt':
-        case 'publishedAt':
-        case 'lastRegisterDate':
-          if (field.type === 'date') {
-            defaults[field.name] = dateFields[field.name as string][0]
-          } else if (field.type === 'datetime-local') {
-            defaults[field.name] = dateFields[field.name as string][1]
-          }
-          break
+      if (field.type === 'date') {
+        const date = model[field.name as keyof T] as string | Date | null
 
+        // Strapi requires date to be string unless it has a time
+        if (date && date instanceof Date) {
+          console.warn('Date field should be string unless it has a time')
+        }
+      }
+
+      if (field.type === 'datetime-local') {
+        const dateTime = model[field.name as keyof T] as string | null
+
+        defaults[field.name] =
+          dateTime &&
+          format(dateTime, "yyyy-MM-dd'T'HH:mm:ss", {
+            in: tz(DEFAULT_TIMEZONE),
+          })
+
+        return
+      }
+
+      if (field.type === 'json') {
+        defaults[field.name] =
+          JSON.stringify(model[field.name as keyof T], null, 2) || ''
+
+        return
+      }
+
+      switch (field.name) {
         case 'mentions':
           defaults.mentions =
             hashtagModel.mentions?.map(m => ({
@@ -130,6 +124,30 @@ export const useDefaultValues = <T extends StrapiModel>(
             label: postModel.hashtag?.title || '',
             value: postModel.hashtag?.id.toString() || '',
           }
+          break
+
+        case 'hashtags':
+          defaults.hashtags =
+            mentionModel.hashtags?.map(h => ({
+              label: h.title || '',
+              value: h.id.toString() || '',
+            })) || []
+          break
+
+        case 'contents':
+          defaults.contents =
+            victimModel.contents?.map(c => ({
+              label: c.title || '',
+              value: c.id.toString() || '',
+            })) || []
+          break
+
+        case 'posts':
+          defaults.posts =
+            victimModel.posts?.map(p => ({
+              label: p.description || '',
+              value: p.id.toString() || '',
+            })) || []
           break
 
         case 'platform':
