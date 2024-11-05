@@ -2,10 +2,12 @@ import * as yup from 'yup'
 
 import type { Collection, FormFields } from '@fc/types'
 
+import { yupDate } from './common'
+
 export const useCollectionSchema = () => {
   return yup.object({
     title: yup.string().required(),
-    date: yup.date().required(),
+    date: yupDate.required(),
     description: yup.string().required(),
     content: yup.string().required(),
     image: yup.mixed().required(),

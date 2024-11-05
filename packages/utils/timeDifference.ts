@@ -1,31 +1,37 @@
-const getMinuteDifferenceBetweenTimeZones = (
-  city1Timezone: string,
-  city2Timezone: string,
+import { tzOffset } from '@date-fns/tz'
+
+export const DEFAULT_TIMEZONE = 'Europe/Amsterdam'
+
+const getTimezoneOffset = (
+  timezone1: string,
+  timezone2: string,
   date: Date | string | number = new Date(),
 ): number => {
-  const now = new Date(date)
-  const city1Time = new Date(
-    now.toLocaleString('en-US', { timeZone: city1Timezone }),
-  )
-  const city2Time = new Date(
-    now.toLocaleString('en-US', { timeZone: city2Timezone }),
-  )
+  const offset1 = tzOffset(timezone1, new Date(date))
+  const offset2 = tzOffset(timezone2, new Date(date))
 
-  const differenceInMinutes =
-    (city2Time.getTime() - city1Time.getTime()) / (1000 * 60)
-
-  return Math.round(differenceInMinutes)
+  return offset2 - offset1
 }
 
-export const getMinuteDifferenceAmsterdamBetweenUTC = (
+export const getTimeOffsetWithUTC = (
   date?: Date | string | number,
-) => getMinuteDifferenceBetweenTimeZones('UTC', 'Europe/Amsterdam', date)
+  timezone = DEFAULT_TIMEZONE,
+) => getTimezoneOffset('UTC', timezone, date)
 
-export const getMinuteDifferenceAmsterdamBetweenLocal = (
+export const getLocalTimeOffset = (
   date?: Date | string | number,
-) =>
-  getMinuteDifferenceBetweenTimeZones(
-    Intl.DateTimeFormat().resolvedOptions().timeZone,
-    'Europe/Amsterdam',
-    date,
-  )
+  timeZone = DEFAULT_TIMEZONE,
+) => {
+  try {
+    // Intl mat not be supported in some older browsers
+    return getTimezoneOffset(
+      Intl.DateTimeFormat().resolvedOptions().timeZone,
+      timeZone,
+      date,
+    )
+  } catch (error) {
+    console.error(error)
+
+    return getTimeOffsetWithUTC(date, timeZone)
+  }
+}

@@ -2,12 +2,12 @@ import * as yup from 'yup'
 
 import type { ArchiveContent, FormFields } from '@fc/types'
 
-import { yupMultiSelect } from './common'
+import { yupDate, yupMultiSelect } from './common'
 
 export const useArchiveContentsSchema = () => {
   return yup.object({
     title: yup.string().required(),
-    date: yup.date().required(),
+    date: yupDate.required(),
     categories: yupMultiSelect,
     content: yup.string().required(),
     source: yup.string().required(),

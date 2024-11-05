@@ -2,13 +2,13 @@ import * as yup from 'yup'
 
 import type { AssetsTracking, FormFields } from '@fc/types'
 
-import { yupSelect } from './common'
+import { yupDate, yupSelect } from './common'
 
 export const useAssetsTrackingSchema = () => {
   return yup.object({
     fromLocation: yup.string().required(),
     toLocation: yup.string().required(),
-    date: yup.date().required(),
+    date: yupDate.required(),
     notes: yup.string(),
     asset: yupSelect.required(),
     assignedTo: yupSelect.required(),

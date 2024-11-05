@@ -4,6 +4,8 @@ import { format } from 'date-fns'
 
 import type { Hashtag, OgImageParams } from '@fc/types'
 
+import { DEFAULT_TIMEZONE } from './timeDifference'
+
 const capsContent = {
   en: { title: 'TAG ANNOUNCEMENT', topic: 'Topic' },
   nl: { title: 'TAG AANKONDIGING', topic: 'Onderwerp' },
@@ -16,10 +18,10 @@ export const mapHashtagToOgParams = (hashtag: Hashtag): OgImageParams => {
 
   const euDate = newDate ? format(newDate, 'dd MMMM yyyy') : ''
   const euTime = newDate
-    ? format(newDate, 'HH:mm', { in: tz('Europe/Amsterdam') })
+    ? format(newDate, 'HH:mm', { in: tz(DEFAULT_TIMEZONE) })
     : ''
   const trTime = newDate
-    ? format(newDate, 'HH:mm', { in: tz('Europe/Istanbul') })
+    ? format(newDate, 'HH:mm', { in: tz(DEFAULT_TIMEZONE) })
     : ''
 
   const TITLE = capsContent[locale].title
